@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteerSafe AI - Real-Time Driving Risk Prediction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-decor">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
+    
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <span class="icon">🛡️</span>
+                <h1>SteerSafe <span class="accent">AI</span></h1>
+            </div>
+            <div class="status-indicator">
+                <span class="pulse-dot active" id="connection-dot"></span>
+                <span id="connection-text">Connecting to System...</span>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Layout -->
+        <main class="dashboard-grid">
+            
+            <!-- Left Panel: Control and Current Status -->
+            <section class="panel main-status-panel">
+                <h2>System Telemetry</h2>
+                <p class="panel-subtitle">Select a driving behavior profile to simulate sensor input in real-time.</p>
+                
+                <div class="profile-selectors">
+                    <button class="btn btn-profile active" data-profile="Safe" id="btn-safe">
+                        <span class="badge badge-safe"></span> Safe Profile
+                    </button>
+                    <button class="btn btn-profile" data-profile="Moderate Risk" id="btn-moderate">
+                        <span class="badge badge-warn"></span> Moderate Risk Profile
+                    </button>
+                    <button class="btn btn-profile" data-profile="High Risk" id="btn-high">
+                        <span class="badge badge-danger"></span> High Risk Profile
+                    </button>
+                </div>
+
+                <div class="risk-gauge-container">
+                    <div class="risk-gauge" id="risk-gauge">
+                        <div class="gauge-inner">
+                            <span class="label">DRIVING RISK</span>
+                            <span class="value" id="risk-value">SAFE</span>
+                            <span class="confidence" id="risk-confidence">Conf: 99.8%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-bar">
+                    <button class="btn btn-primary" id="btn-simulate-once">Run Single Prediction</button>
+                    <button class="btn btn-secondary" id="btn-toggle-loop">Start Live Simulation (3s Loop)</button>
+                </div>
+            </section>
+
+            <!-- Middle Panel: Sensor Graph and Values -->
+            <section class="panel sensor-data-panel">
+                <h2>Real-Time Motion Sensors</h2>
+                
+                <div class="sensor-grid">
+                    <div class="sensor-card">
+                        <h3>Accelerometer (m/s²)</h3>
+                        <div class="sensor-readings">
+                            <div class="reading"><span class="axis">X:</span> <span id="val-ax">0.00</span></div>
+                            <div class="reading"><span class="axis">Y:</span> <span id="val-ay">0.00</span></div>
+                            <div class="reading"><span class="axis">Z:</span> <span id="val-az">9.81</span></div>
+                        </div>
+                    </div>
+                    <div class="sensor-card">
+                        <h3>Gyroscope (deg/s)</h3>
+                        <div class="sensor-readings">
+                            <div class="reading"><span class="axis">X:</span> <span id="val-gx">0.00</span></div>
+                            <div class="reading"><span class="axis">Y:</span> <span id="val-gy">0.00</span></div>
+                            <div class="reading"><span class="axis">Z:</span> <span id="val-gz">0.00</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sensor-visualizer">
+                    <div class="vis-header">
+                        <span>Window Waveform View (30 Samples)</span>
+                    </div>
+                    <div class="waveforms">
+                        <div class="wave-container">
+                            <div class="wave-label">Accel X/Y/Z</div>
+                            <div class="canvas-wrapper">
+                                <canvas id="accel-canvas"></canvas>
+                            </div>
+                        </div>
+                        <div class="wave-container">
+                            <div class="wave-label">Gyro X/Y/Z</div>
+                            <div class="canvas-wrapper">
+                                <canvas id="gyro-canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Alerts and simulated SMS notifications -->
+            <section class="panel alerts-panel">
+                <h2>Security & Notifications</h2>
+                
+                <div class="simulated-sms-container" id="sms-container">
+                    <div class="sms-header">
+                        <span>Simulated SMS Alert (GSM Module Link)</span>
+                    </div>
+                    <div class="sms-body" id="sms-body">
+                        <p class="empty-sms">No critical events detected. Safe drive in progress.</p>
+                    </div>
+                </div>
+
+                <div class="logs-header">
+                    <h3>Incident Log History</h3>
+                    <button class="btn-clear" id="btn-clear-logs">Refresh</button>
+                </div>
+                
+                <div class="logs-list" id="logs-list">
+                    <!-- Logs populated by app.js -->
+                </div>
+            </section>
+
+        </main>
+    </div>
+    
+    <!-- Audio alert element -->
+    <audio id="alert-sound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-84.wav" preload="auto"></audio>
+
+    <script src="app.js"></script>
+</body>
+</html>
