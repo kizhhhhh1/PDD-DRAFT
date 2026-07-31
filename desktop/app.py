@@ -118,7 +118,7 @@ class SteerSafeDesktopApp(ctk.CTk):
         self.sensors_frame.columnconfigure(1, weight=1)
         
         # Accel box
-        self.accel_box = ctk.CTkFrame(self.sensors_frame, fg_color="#0d1226", corner_radius=8, padding=10)
+        self.accel_box = ctk.CTkFrame(self.sensors_frame, fg_color="#0d1226", corner_radius=8)
         self.accel_box.grid(row=0, column=0, padx=(0, 5), sticky="ew")
         self.accel_lbl = ctk.CTkLabel(self.accel_box, text="Accelerometer (m/s²)", font=ctk.CTkFont(size=11, weight="bold"), text_color="#90a0c7")
         self.accel_lbl.pack(anchor="w", padx=5)
@@ -126,7 +126,7 @@ class SteerSafeDesktopApp(ctk.CTk):
         self.ax_val_lbl.pack(anchor="w", padx=5, pady=5)
         
         # Gyro box
-        self.gyro_box = ctk.CTkFrame(self.sensors_frame, fg_color="#0d1226", corner_radius=8, padding=10)
+        self.gyro_box = ctk.CTkFrame(self.sensors_frame, fg_color="#0d1226", corner_radius=8)
         self.gyro_box.grid(row=0, column=1, padx=(5, 0), sticky="ew")
         self.gyro_lbl = ctk.CTkLabel(self.gyro_box, text="Gyroscope (deg/s)", font=ctk.CTkFont(size=11, weight="bold"), text_color="#90a0c7")
         self.gyro_lbl.pack(anchor="w", padx=5)
